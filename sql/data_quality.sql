@@ -13,7 +13,7 @@ where
 -- 606 474 trips
 -- Earliest trip: 2023-10-01 00:00:00 UTC
 -- Latest trip: 2023-10-31 23:45:00 UTC
---
+
 -- Conclusion:
 -- The dataset contains a full month of October 2023.
 
@@ -29,6 +29,9 @@ where
 
 -- Result
 -- 61 381 trips or 10,1% of all October trips
+
+-- Conclusion:
+-- About 10% of trips have incomplete geographic information.
 
 
 
@@ -46,3 +49,7 @@ where
 
 -- Result
 -- 11639 trips or 1,92% of all October trips 
+
+-- Conclusion:
+-- These records require additional investigation before deciding
+-- whether they should be excluded.
