@@ -28,4 +28,21 @@ where
     and trip_start_timestamp < '2023-11-01';
 
 -- Result
--- 61 381 trips or 10,1% of all trips
+-- 61 381 trips or 10,1% of all October trips
+
+
+
+-- 3. Zero distance and zero duration
+-- Question:
+-- How many trips have both zero distance and zero duration?
+select
+    count(*)
+from `bigquery-public-data.chicago_taxi_trips.taxi_trips`
+where
+    trip_start_timestamp >= '2023-10-01'
+    and trip_start_timestamp < '2023-11-01'
+    and trip_miles = 0
+    and trip_seconds = 0;
+
+-- Result
+-- 11639 trips or 1,92% of all October trips 
