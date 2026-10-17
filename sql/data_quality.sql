@@ -56,17 +56,34 @@ where
 
 
 
--- 4. Payment types with zero distance and duration | Способы оплаты с нулевыми расстоянием и длительноостью
+-- 4.1 Payment types with zero distance and duration | Способы оплаты с нулевыми расстоянием и длительноостью
 -- Question
--- How does the proportion of trips with zero distance and duration vary by payment method? | Как различается доля поездок с нулевыми расстоянием и длительностью в зависимости от способа оплаты?
+-- How does the proportion of trips with zero distance AND duration vary by payment method? | Как различается доля поездок с нулевыми расстоянием и длительностью в зависимости от способа оплаты?
 select
     payment_type,
     count(*) as all_trips,
-    count(*) filter(where trip_miles = 0 and trip_seconds = 0) as zero_miles_seconds,
-    round(count(*) filter(where trip_miles = 0 and trip_seconds = 0)::numeric / count(*) * 100, 2) as percent
+    count(*) filter(where trip_miles = 0 AND trip_seconds = 0) as zero_miles_seconds,
+    round(count(*) filter(where trip_miles = 0 AND trip_seconds = 0)::numeric / count(*) * 100, 2) as percent
 from taxi_trips_october
 group by 1
 order by 4 desc
 
 -- Result
--- Dispute - 12,12%, No Charge - 10,91%, Cash 4,66%, Credit Card 1,22%
+-- Dispute - 12,12%, No Charge - 10,91%, Cash - 4,66%, Credit Card - 1,22%, Unknown - 0,37%, Prcard - <0,01%, Mobile - 0%
+
+
+
+-- 4.2 
+-- Question
+-- How does the proportion of trips with zero distance OR zero duration vary by payment method?
+select
+    payment_type,
+    count(*) as all_trips,
+    count(*) filter(where trip_miles = 0 OR trip_seconds = 0) as zero_miles_OR_seconds,
+    round(count(*) filter(where trip_miles = 0 OR trip_seconds = 0)::numeric / count(*) * 100, 2) as percent
+from taxi_trips_october
+group by 1
+order by 4 desc
+
+-- Result
+-- Dispute - 40%, No Charge - 25,07%, Cash - 15,39%, Mobile - 12,15%, Unknown - 9.91%, Credit Card - 8,64%, Prcard - 0,32%, 
