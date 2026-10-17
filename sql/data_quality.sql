@@ -35,7 +35,7 @@ where
 
 
 
--- 3. Zero distance and zero duration | Нулевые дистанцич и длительность поездки
+-- 3. Zero distance and zero duration | Нулевые дистанции и длительность поездки
 -- Question:
 -- How many trips have both zero distance and zero duration? | Как много строк не имеют дистанции И продолжительности поездки?
 select
@@ -53,3 +53,20 @@ where
 -- Conclusion:
 -- These records require additional investigation before deciding. | Данные требует дополнительного изучения,
 -- whether they should be excluded. | чтобы принять решение об их исключении.
+
+
+
+-- 4. Payment types with zero distance and duration | Способы оплаты с нулевыми расстоянием и длительноостью
+-- Question
+-- How does the proportion of trips with zero distance and duration vary by payment method? | Как различается доля поездок с нулевыми расстоянием и длительностью в зависимости от способа оплаты?
+select
+    payment_type,
+    count(*) as all_trips,
+    count(*) filter(where trip_miles = 0 and trip_seconds = 0) as zero_miles_seconds,
+    round(count(*) filter(where trip_miles = 0 and trip_seconds = 0)::numeric / count(*) * 100, 2) as percent
+from taxi_trips_october
+group by 1
+order by 4 desc
+
+-- Result
+
