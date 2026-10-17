@@ -69,4 +69,4 @@ group by 1
 order by 4 desc
 
 -- Result
-
+-- Dispute - 12,12%, No Charge - 10,91%, Cash 4,66%, Credit Card 1,22%
